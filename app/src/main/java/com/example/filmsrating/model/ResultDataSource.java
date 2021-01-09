@@ -24,8 +24,9 @@ public class ResultDataSource extends PageKeyedDataSource<Integer, Result> {
         Call<Page> data = netService.getPopular(1);
         data.enqueue(new Callback<Page>() {
             @Override
-            public void onResponse(Call<Page> call, Response<Page> response) {
+            public void onResponse(@NonNull Call<Page> call, @NonNull Response<Page> response) {
                 if (response.isSuccessful()) {
+                    assert response.body() != null;
                     List<Result> resultList = response.body().getResults();
                     Log.d(MainActivity.TAG, "filmListSize " + resultList.size());
                     callback.onResult(resultList, 1, 2);
@@ -35,7 +36,7 @@ public class ResultDataSource extends PageKeyedDataSource<Integer, Result> {
             }
 
             @Override
-            public void onFailure(Call<Page> call, Throwable t) {
+            public void onFailure(@NonNull Call<Page> call, @NonNull Throwable t) {
                 Log.e(MainActivity.TAG, "some error " + t);
             }
         });
@@ -45,16 +46,17 @@ public class ResultDataSource extends PageKeyedDataSource<Integer, Result> {
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Result> callback) {
         netService = RetrofitInstance.getRetrofitInstance().create(GetNetService.class);
         if (params.key > 1) {
-            Call<Page> data = netService.getPopular(params.key-1);
+            Call<Page> data = netService.getPopular(params.key - 1);
             data.enqueue(new Callback<Page>() {
                 @Override
-                public void onResponse(Call<Page> call, Response<Page> response) {
+                public void onResponse(@NonNull Call<Page> call, @NonNull Response<Page> response) {
+                    assert response.body() != null;
                     List<Result> resultList = response.body().getResults();
                     callback.onResult(resultList, params.key - 1);
                 }
 
                 @Override
-                public void onFailure(Call<Page> call, Throwable t) {
+                public void onFailure(@NonNull Call<Page> call, @NonNull Throwable t) {
                     Log.d(MainActivity.TAG, "some error " + t);
                 }
             });
@@ -64,16 +66,17 @@ public class ResultDataSource extends PageKeyedDataSource<Integer, Result> {
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Result> callback) {
         netService = RetrofitInstance.getRetrofitInstance().create(GetNetService.class);
-        Call<Page> data = netService.getPopular(params.key+1);
+        Call<Page> data = netService.getPopular(params.key + 1);
         data.enqueue(new Callback<Page>() {
             @Override
-            public void onResponse(Call<Page> call, Response<Page> response) {
+            public void onResponse(@NonNull Call<Page> call, @NonNull Response<Page> response) {
+                assert response.body() != null;
                 List<Result> resultList = response.body().getResults();
                 callback.onResult(resultList, params.key + 1);
             }
 
             @Override
-            public void onFailure(Call<Page> call, Throwable t) {
+            public void onFailure(@NonNull Call<Page> call, @NonNull Throwable t) {
                 Log.d(MainActivity.TAG, "some error " + t);
             }
         });

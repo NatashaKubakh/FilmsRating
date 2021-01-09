@@ -11,7 +11,7 @@ public class Page {
     public int page;
     @SerializedName("results")
     @Expose
-    public List<Result> results = null;
+    public List<Result> results;
     @SerializedName("total_pages")
     @Expose
     public int totalPages;

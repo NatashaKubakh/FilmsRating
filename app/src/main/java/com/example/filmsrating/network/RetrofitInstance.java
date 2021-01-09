@@ -16,10 +16,9 @@ public class RetrofitInstance {
     private static final String BASE_URL = "https://developers.themoviedb.org/3/movies/";
 
     private static Gson getGson() {
-        Gson gson = new GsonBuilder()
+        return new GsonBuilder()
                 .setLenient()
                 .create();
-        return gson;
     }
 
 

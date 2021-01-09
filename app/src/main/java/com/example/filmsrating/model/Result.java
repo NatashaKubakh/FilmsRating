@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Result {
+public class Result implements Serializable {
     @SerializedName("adult")
     @Expose
     public boolean adult;
@@ -17,7 +18,7 @@ public class Result {
     public String backdropPath;
     @SerializedName("genre_ids")
     @Expose
-    public List<Integer> genreIds = null;
+    public List<Integer> genreIds;
     @SerializedName("id")
     @Expose
     public int id;

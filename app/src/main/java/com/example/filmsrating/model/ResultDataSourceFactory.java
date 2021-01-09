@@ -2,6 +2,7 @@ package com.example.filmsrating.model;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 
@@ -11,6 +12,7 @@ public class ResultDataSourceFactory extends DataSource.Factory {
 
     private MutableLiveData<ResultDataSource> mutableLiveData = new MutableLiveData<>();
 
+    @NonNull
     @Override
     public DataSource create() {
         ResultDataSource resultDataSource = new ResultDataSource();
