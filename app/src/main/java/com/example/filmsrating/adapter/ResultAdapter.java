@@ -61,17 +61,6 @@ public class ResultAdapter extends PagedListAdapter<Result, ResultAdapter.Result
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .skipMemoryCache(true))
                     .into(resultViewHolder.binding.imageFilm);
-            if (resultViewHolder.binding.getResult().backdropPath != null) {
-                String backGround = "https://image.tmdb.org/t/p/w220_and_h330_face" + resultViewHolder.binding.getResult().backdropPath;
-                Glide.with(resultViewHolder.itemView.getContext())
-                        .load(backGround)
-                        .apply(new RequestOptions()
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                .skipMemoryCache(true)
-                        )
-                        .transform(new BlurTransformation(), new CenterCrop())
-                        .into(resultViewHolder.binding.layoutMain);
-            }
         }
         resultViewHolder.binding.executePendingBindings();
     }

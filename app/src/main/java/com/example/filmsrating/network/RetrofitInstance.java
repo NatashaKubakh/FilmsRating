@@ -13,7 +13,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitInstance {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://developers.themoviedb.org/3/movies/";
+    private static final String BASE_URL = "https://api.themoviedb.org/3/";
 
     private static Gson getGson() {
         return new GsonBuilder()

@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         binding.filmsList.setLayoutManager(new LinearLayoutManager(this));
         binding.filmsList.setAdapter(resultAdapter);
         binding.setNotEmpty(true);
-
         mainActivityViewModel.getPagedListLiveData().observe(this, results -> resultAdapter.submitList(results));
     }
 
