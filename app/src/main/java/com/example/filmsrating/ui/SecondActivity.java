@@ -25,8 +25,8 @@ public class SecondActivity extends AppCompatActivity {
         if (b != null) {
             Result result = (Result) b.getSerializable(MainActivity.KEY_RESULT_OBJECT);
             binding.setResult(result);
-            if (binding.getResult().backdropPath != null) {
-                String backGround = "https://image.tmdb.org/t/p/w220_and_h330_face" + result.backdropPath;
+            if (binding.getResult().getBackdropPath() != null) {
+                String backGround = "https://image.tmdb.org/t/p/w220_and_h330_face" + result.getBackdropPath();
                 Glide.with(this)
                         .load(backGround)
                         .transition(DrawableTransitionOptions.withCrossFade())

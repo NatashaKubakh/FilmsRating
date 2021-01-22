@@ -1,5 +1,7 @@
 package com.example.filmsrating.model;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
@@ -12,46 +14,46 @@ import java.util.List;
 public class Result implements Serializable {
     @SerializedName("adult")
     @Expose
-    public boolean adult;
+    private boolean adult;
     @SerializedName("backdrop_path")
     @Expose
-    public String backdropPath;
+    private String backdropPath;
     @SerializedName("genre_ids")
     @Expose
-    public List<Integer> genreIds;
+    private List<Integer> genreIds;
     @SerializedName("id")
     @Expose
-    public int id;
+    private int id;
     @SerializedName("original_language")
     @Expose
-    public String originalLanguage;
+    private String originalLanguage;
     @SerializedName("original_title")
     @Expose
-    public String originalTitle;
+    private String originalTitle;
     @SerializedName("overview")
     @Expose
-    public String overview;
+    private String overview;
     @SerializedName("popularity")
     @Expose
-    public double popularity;
+    private double popularity;
     @SerializedName("poster_path")
     @Expose
-    public String posterPath;
+    private String posterPath;
     @SerializedName("release_date")
     @Expose
-    public String releaseDate;
+    private String releaseDate;
     @SerializedName("title")
     @Expose
-    public String title;
+    private String title;
     @SerializedName("video")
     @Expose
-    public boolean video;
+    private boolean video;
     @SerializedName("vote_average")
     @Expose
-    public double voteAverage;
+    private double voteAverage;
     @SerializedName("vote_count")
     @Expose
-    public int voteCount;
+    private int voteCount;
 
     public Result(boolean adult, String backdropPath, List<Integer> genreIds,
                   int id, String originalLanguage, String originalTitle, String overview,
@@ -187,13 +189,14 @@ public class Result implements Serializable {
 
     public static final DiffUtil.ItemCallback<Result> CALLBACK = new DiffUtil.ItemCallback<Result>() {
         @Override
-        public boolean areItemsTheSame(@NonNull Result result, @NonNull Result t1) {
-            return result.id == t1.id;
+        public boolean areItemsTheSame(@NonNull Result oldItem, @NonNull Result newItem) {
+            return oldItem.getId() == newItem.getId();
         }
 
+        @SuppressLint("DiffUtilEquals")
         @Override
-        public boolean areContentsTheSame(@NonNull Result result, @NonNull Result t1) {
-            return true;
+        public boolean areContentsTheSame(@NonNull Result oldItem, @NonNull Result newItem) {
+            return oldItem.equals(newItem);
         }
     };
 }

@@ -50,19 +50,21 @@ public class ResultAdapter extends PagedListAdapter<Result, ResultAdapter.Result
 
 
     @Override
-    public void onBindViewHolder(@NonNull ResultViewHolder resultViewHolder, int i) {
+    public void onBindViewHolder(@NonNull ResultViewHolder holder, int i) {
         Result result = getItem(i);
-        resultViewHolder.binding.setResult(result);
-        if (resultViewHolder.binding.getResult().posterPath != null) {
-            String poster = "https://image.tmdb.org/t/p/w220_and_h330_face" + resultViewHolder.binding.getResult().posterPath;
-            Glide.with(resultViewHolder.itemView.getContext())
-                    .load(poster)
-                    .apply(new RequestOptions()
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .skipMemoryCache(true))
-                    .into(resultViewHolder.binding.imageFilm);
+        if (result != null) {
+            holder.binding.setResult(result);
+            if (result.getPosterPath() != null) {
+                String poster = "https://image.tmdb.org/t/p/w220_and_h330_face" + result.getPosterPath();
+                Glide.with(holder.itemView.getContext())
+                        .load(poster)
+                        .apply(new RequestOptions()
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true))
+                        .into(holder.binding.imageFilm);
+            }
         }
-        resultViewHolder.binding.executePendingBindings();
+        holder.binding.executePendingBindings();
     }
 
 

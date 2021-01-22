@@ -33,9 +33,14 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         resultAdapter = new ResultAdapter(myResultCallBack);
         binding.filmsList.setLayoutManager(new LinearLayoutManager(this));
-        binding.filmsList.setAdapter(resultAdapter);
         binding.setNotEmpty(true);
-        mainActivityViewModel.getPagedListLiveData().observe(this, results -> resultAdapter.submitList(results));
+        mainActivityViewModel.getPagedListLiveData().observe(this, new Observer<PagedList<Result>>() {
+            @Override
+            public void onChanged(PagedList<Result> results) {
+                resultAdapter.submitList(results);
+            }
+        });
+        binding.filmsList.setAdapter(resultAdapter);
     }
 
     private final MyResultCallback myResultCallBack = result -> {
